@@ -1,2 +1,2 @@
 # Portfolio_Optimizer
-Portfolio optimization is the process of selecting an optimal portfolio (asset distribution), out of a set of considered portfolios
+Portfolio optimization is the process of selecting an optimal portfolio (asset distribution), out of a set of considered portfolios, according to some objective. The objective typically maximizes factors such as expected return, and minimizes costs like financial risk, resulting in a multi-objective optimization problem. Factors being considered may range from tangible (such as assets, liabilities, earnings or other fundamentals) to intangible (such as selective divestment).
