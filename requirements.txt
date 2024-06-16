@@ -1,0 +1,11 @@
+streamlit
+numpy
+seaborn
+matplotlib
+plotly
+monthly_returns_heatmap
+PyPortfolioOpt
+Pillow
+scipy
+quantstats
+ipython
