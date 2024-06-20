@@ -197,3 +197,24 @@ if uploaded_file is not None:
     
 else:
     st.stop()
+
+
+c1_,c2_,c3_= st.columns([0.5,6,0.5])
+
+c2_.write("---") 
+c2_.write("**About**")
+
+c2_.write(
+'''
+Created by @VanHe1sing  
+       
+TradingView: https://www.tradingview.com/u/VanHe1sing/#published-scripts     
+Telegram: https://t.me/IvanKocherzhat
+X: https://x.com/sxJEoRg7wwLR6ug
+
+
+*This site is for informational purposes only.*\n
+*· The information on our website is not financial advice, and you should not consider it to be financial advice.*
+'''
+)
+
