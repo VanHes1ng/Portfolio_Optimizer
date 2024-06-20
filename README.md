@@ -9,7 +9,8 @@
 2. **File Upload**:
    - Users can upload a CSV file containing asset price data. The application expects the file to have a date column (`time`) in `MM-DD-YYYY` format and asset price columns in numerical format.
    - Displays an example CSV format to guide users.
-![plot](images/image.png)
+![plot](images/upload.png)
+
 
 4. **Portfolio Optimization Methods**:
    - **Sharpe Ratio Optimization**: Maximizes the Sharpe ratio to optimize the portfolio.
