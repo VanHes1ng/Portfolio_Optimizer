@@ -51,6 +51,8 @@ time, Asset1, Asset2, Asset3, ...
 ...
 ```
 
+![plot](images/image.png)
+
 2. **Set Optimization Parameters**:
    - Select the optimization method (`Sharpe` or `Min Volatility`).
    - Adjust the weight range using the slider.
