@@ -193,7 +193,7 @@ if uploaded_file is not None:
         c1.write(f"Max Draw Down:"),             c2.write(f"{maxdd_} %")
 
 
-        st.area_chart(maxdd_rol, color="#d14747")
+        st.area_chart(maxdd_rol*100, color="#d14747")
     
 else:
     st.stop()
