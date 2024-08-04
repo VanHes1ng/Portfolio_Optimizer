@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import streamlit as st
-
+from pypfopt import expected_returns, HRPOpt
 
 class portfolio_optimization:
     def sharpe(src): 
