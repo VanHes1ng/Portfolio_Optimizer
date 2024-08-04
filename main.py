@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import time
-from pypfopt import EfficientFrontier
+from pypfopt.efficient_frontier import EfficientFrontier
 from pypfopt import risk_models
 from pypfopt import expected_returns, HRPOpt
 
