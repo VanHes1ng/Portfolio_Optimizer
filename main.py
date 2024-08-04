@@ -5,7 +5,7 @@ import numpy as np
 import time
 from pypfopt.efficient_frontier import EfficientFrontier
 from pypfopt import risk_models
-from pypfopt import expected_returns, HRPOpt
+from pypfopt import expected_returns
 
 
 from streamlit.components.v1 import html
