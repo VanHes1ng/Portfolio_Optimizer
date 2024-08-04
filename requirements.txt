@@ -9,3 +9,4 @@ Pillow
 scipy
 quantstats
 ipython
+scikit-learn
