@@ -1,13 +1,11 @@
 # Imports
-import streamlit as st
-import pandas as pd
-import numpy as np
 import time
+
+import numpy as np
+import pandas as pd
+import streamlit as st
+from pypfopt import expected_returns, risk_models
 from pypfopt.efficient_frontier import EfficientFrontier
-from pypfopt import risk_models
-from pypfopt import expected_returns
-
-
 from streamlit.components.v1 import html
 
 from functions import portfolio_optimization as po
@@ -90,7 +88,7 @@ if uploaded_file is not None:
     method = c_2.radio(
                       "Set a method and Run optimization ⚙️",
                       key        =    "visibility",
-                      options    =   ["Sharpe", "Min Volatility"],
+                      options    =   ["Sharpe", "Min Volatility", "Omega"],
                       horizontal =   True
                         )
     
@@ -136,7 +134,29 @@ if uploaded_file is not None:
         c_2.dataframe(cleaned_weights, use_container_width = True)
         c_2.write("---")
 
-    with c_2:
+    if method == "Omega" and button:
+        c_2.write("---")
+        c_2.subheader(f"Optimal :blue[{method}] Weights")
+        c_2.write("###")
+        
+        # Calculate returns
+        returns = df.pct_change().dropna()
+        
+        # Get optimal weights using static method
+        optimal_weights = po.optimize_omega(returns=returns, threshold=0.0, bounds=values)
+        weights = pd.Series(optimal_weights, index=df.columns)
+        
+        cleaned_weights = dict(zip(df.columns, optimal_weights))
+
+        c_2.bar_chart(cleaned_weights, use_container_width=True, height=500)
+        c_2.dataframe(cleaned_weights, use_container_width = True)
+        c_2.write("---")
+        
+        # Plot efficient frontier with custom weights
+        po.plot_ef(5000, ef, method, custom_weights=optimal_weights)
+
+    else:
+        # For other optimization methods
         po.plot_ef(5000, ef, method)
 
 
@@ -165,9 +185,9 @@ if uploaded_file is not None:
     maxdd_rol   = po.rol_max_drawdown(final_df['Portfolio']*100)
     cum_ret     = np.round((np.exp(np.log1p(final_df.pct_change()['Portfolio']).cumsum()).iloc[-1]) * 100, 2)
 
-    dail_vol    = np.round(po.daily_vol(final_df).iloc[0]*100, 2)
+    daily_vol    = np.round(po.daily_vol(final_df).iloc[0]*100, 2)
     monthly_vol = np.round(po.daily_vol(final_df).iloc[0]*100 * np.sqrt(30), 2)
-    anuall_vol  = np.round(po.daily_vol(final_df).iloc[0]*100 * np.sqrt(365), 2)
+    annual_vol  = np.round(po.daily_vol(final_df).iloc[0]*100 * np.sqrt(365), 2)
 
     sharpe      = np.round(po.sharpe(final_df).iloc[0], 2)
     sortino     = np.round(po.sortino(final_df).iloc[0], 2)
@@ -186,9 +206,9 @@ if uploaded_file is not None:
         c1.write(f"Sortino Ratio:"),             c2.write(f"{sortino}")
         c1.write(f"Omega Ratio:"),               c2.write(f"{omega}")
         c1.write("---"),                         c2.write("---")
-        c1.write(f"AVG Daily Volatility:"),      c2.write(f"{dail_vol} %")
+        c1.write(f"AVG Daily Volatility:"),      c2.write(f"{daily_vol} %")
         c1.write(f"AVG Monthly Volatility:"),    c2.write(f"{monthly_vol} %")
-        c1.write(f"AVG Anuall Volatility:"),     c2.write(f"{anuall_vol} %")
+        c1.write(f"AVG Annual Volatility:"),     c2.write(f"{annual_vol} %")
         c1.write("---"),                         c2.write("---")    
         c1.write(f"Max Draw Down:"),             c2.write(f"{maxdd_} %")
 
